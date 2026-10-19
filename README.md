@@ -2,6 +2,8 @@
 
 A little workspace for focus, notes, and CSS experiments.
 
+[Open Dotworks](https://deysan.github.io/dotworks/)
+
 Three circular buttons on a blue blueprint grid open lightweight tools in animated dialogs. Built with HTML, CSS, and vanilla JavaScript, with no dependencies or build step.
 
 ## Tools
@@ -42,6 +44,10 @@ README.md      Project overview and local setup
 ## Data and browser behavior
 
 Notes are stored in `localStorage` for the current browser and origin; they are not synced between devices. Reloading the page resets the timer. The completion sound requires browser audio support and permission to play; a suspended browser tab may delay the sound. Clipboard access requires a secure context such as HTTPS or localhost, with manual text selection as a fallback.
+
+## Deployment
+
+GitHub Pages serves the repository root from the `main` branch. Changes pushed to `main` are published automatically. The `.nojekyll` file keeps the site as plain static files.
 
 ## Inspiration
 
