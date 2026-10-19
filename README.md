@@ -79,7 +79,11 @@ Notes are stored in `localStorage` for the current browser and origin; they are 
 
 ## Deployment
 
-GitHub Pages serves the repository root from the `main` branch. Changes pushed to `main` are published automatically. The `.nojekyll` file keeps the site as plain static files.
+The [CI and Pages workflow](https://github.com/deysan/dotworks/actions/workflows/ci-pages.yml) runs `npm test` on Node.js 24 for every push and pull request. No dependency installation is needed.
+
+Only pushes to `main` can deploy. The deployment job depends on successful tests for that same commit; failed or cancelled tests prevent publication. Pull requests and pushes to other branches run tests without updating the live site.
+
+GitHub Pages uses **GitHub Actions** as its publishing source. After tests pass, the workflow packages only `index.html`, `src/`, and `.nojekyll`, then deploys to the `github-pages` environment. Documentation, tests, and repository configuration are not included in the published site. The `.nojekyll` file keeps it as plain static files.
 
 ## Inspiration
 
