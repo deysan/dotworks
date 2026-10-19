@@ -1,0 +1,14 @@
+@import "./base.css";
+@import "../shared/ui/buttons.css";
+@import "../shared/ui/launcher.css";
+@import "../shared/ui/modal.css";
+@import "../features/pomodoro/styles.css";
+@import "../features/notes/styles.css";
+@import "../features/css-builder/styles.css";
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

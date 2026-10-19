@@ -1,0 +1,32 @@
+.notes .note-label {
+  display: block;
+  font-size: 12px;
+  color: #647d89;
+  margin-bottom: 10px;
+}
+
+.notes textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 200px;
+  border: 0;
+  background: repeating-linear-gradient(transparent, transparent 31px, #16344e12 31px, #16344e12 32px);
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--ink);
+  padding: 0 4px;
+}
+
+.notes .note-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  gap: 10px;
+  font-size: 11px;
+  color: #647d89;
+}
+
+.notes .note-foot button {
+  font-size: 11px;
+}

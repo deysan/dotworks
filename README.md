@@ -36,10 +36,42 @@ Open [localhost:8000](http://localhost:8000).
 ## Project structure
 
 ```text
-index.html     Page markup, styling, and widget behavior
-README.md      Project overview and local setup
-.gitignore     Local files excluded from version control
+index.html                 Static page shell and module entry point
+src/
+  app.js                   Feature registration and startup
+  styles/                  Base styles and stylesheet imports
+  shared/ui/               Circular launchers, animated dialogs, shared buttons
+  features/
+    pomodoro/              View, styles, controller, countdown model, completion sound
+    notes/                 View, styles, controller, local draft persistence
+    css-builder/           View, styles, controller, CSS generation model
+tests/                     Countdown and CSS generation regression tests
 ```
+
+The app uses native ES modules. Each feature owns its markup in `view.js`, its scoped CSS in `styles.css`, and its behavior in `index.js`. Countdown calculations and CSS generation are separate from the DOM so they can be tested directly.
+
+`src/app.js` registers the features and mounts each one once. Shared launchers and dialogs handle opening, animated closing, and keyboard focus. Widget state stays inside the feature and survives closing its dialog.
+
+All asset and import paths are relative, so the same source works locally and under the `/dotworks/` GitHub Pages path. Use an HTTP server as shown above; ES modules do not load reliably from a `file://` URL.
+
+## Tests
+
+With Node.js 20 or later:
+
+```sh
+npm test
+```
+
+No dependency installation is needed. Tests use the built-in Node.js test runner and cover deadline-based timing, pause/resume, mode resets, completion, and CSS output.
+
+## Add a tool
+
+1. Create a folder under `src/features/` with `view.js`, `styles.css`, and `index.js`.
+2. Export a feature definition with a unique `id`, a CSS `className`, `label`, `title`, `stamp`, `icon`, `content`, and an `init(root)` function. Query widget elements inside `root` rather than across the document.
+3. Import and register it in the `features` array in `src/app.js`.
+4. Import its stylesheet in `src/styles/index.css`, and add a launcher position and appearance delay in `src/shared/ui/launcher.css`.
+
+Keep feature-specific state and helpers in the feature folder. Move code into `shared/` when it is used by multiple features. Preserve the existing Notes storage key when changing draft persistence.
 
 ## Data and browser behavior
 

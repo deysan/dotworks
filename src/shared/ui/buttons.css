@@ -1,0 +1,17 @@
+.mode,
+.secondary {
+  background: transparent;
+  border: 1px solid #16344e28;
+  border-radius: 5px;
+  padding: 9px 13px;
+  font-size: 12px;
+}
+
+.primary {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: white;
+  padding: 11px 26px;
+  border-radius: 5px;
+  font-size: 13px;
+}

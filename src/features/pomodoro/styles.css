@@ -1,0 +1,30 @@
+.pomodoro .modes,
+.pomodoro .actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pomodoro .mode[aria-pressed=true] {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+
+.pomodoro .clock {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(64px, 13vw, 90px);
+  line-height: 1;
+  letter-spacing: -.065em;
+  text-align: center;
+  margin: 22px 0 12px;
+}
+
+.pomodoro .timer-status {
+  text-align: center;
+  font-size: 12px;
+  color: #647d89;
+  min-height: 16px;
+  margin: 0 0 21px;
+}

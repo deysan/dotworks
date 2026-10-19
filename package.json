@@ -1,0 +1,10 @@
+{
+  "name": "dotworks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A little workspace for focus, notes, and CSS experiments.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

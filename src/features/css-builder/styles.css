@@ -1,0 +1,116 @@
+.css-builder .builder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.css-builder .controls {
+  display: grid;
+  gap: 17px;
+}
+
+.css-builder .control label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.css-builder .control output {
+  font-family: monospace;
+  color: #647d89;
+}
+
+.css-builder input[type=range] {
+  width: 100%;
+  accent-color: #0871c9;
+  margin: 0;
+}
+
+.css-builder input[type=color] {
+  width: 40px;
+  height: 28px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.css-builder .colors {
+  display: flex;
+  gap: 25px;
+}
+
+.css-builder .colors label {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.css-builder .preview {
+  min-height: 200px;
+  border: 1px solid #16344e12;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(45deg, #eaf0f2 0 8px, #f4f7f8 8px 16px);
+  overflow: hidden;
+}
+
+.css-builder .sample {
+  width: 115px;
+  height: 115px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.css-builder .code-wrap {
+  margin-top: 22px;
+  background: #eef1ed;
+  border-radius: 4px;
+  padding: 14px;
+  position: relative;
+}
+
+.css-builder pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 11px;
+  line-height: 1.7;
+  padding-right: 65px;
+  overflow-wrap: anywhere;
+}
+
+.css-builder .copy {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 11px;
+  padding: 7px 10px;
+  background: var(--paper);
+  border: 1px solid #16344e28;
+  border-radius: 4px;
+}
+
+.css-builder .copy-status {
+  font-size: 11px;
+  min-height: 14px;
+  margin: 8px 0 0;
+  color: #647d89;
+}
+
+@media (max-width:600px) {
+  .css-builder .builder {
+    grid-template-columns: 1fr;
+  }
+
+  .css-builder .preview {
+    min-height: 170px;
+  }
+
+  .css-builder .colors {
+    justify-content: space-between;
+  }
+}
