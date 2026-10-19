@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#087de0"><title>Dotworks</title><meta name="description" content="A little workspace for focus, notes, and CSS experiments. Three tools on a blueprint grid."><style>
+:root{--ink:#15344e;--paper:#fffdf6}*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background-color:#087de0;background-image:linear-gradient(to right,#18b9ff 3px,transparent 3px),linear-gradient(to bottom,#18b9ff 3px,transparent 3px),linear-gradient(to right,#18b9ff 1px,transparent 1px),linear-gradient(to bottom,#18b9ff 1px,transparent 1px);background-size:125px 125px,125px 125px,25px 25px,25px 25px;min-height:100dvh}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #ffc84e;outline-offset:5px}main{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px}
+.tools{position:relative;width:min(520px,100%);height:400px;margin:0}
+.tool{width:160px;height:160px;border:0;border-radius:50%;background:#fff;position:absolute;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);transition:transform .25s;animation:tool-appear 360ms ease-in-out both}
+.tool:nth-child(1){left:50%;top:18%;animation-delay:150ms}.tool:nth-child(2){left:20%;top:76%;animation-delay:300ms}.tool:nth-child(3){left:80%;top:76%;animation-delay:450ms}
+@keyframes tool-appear{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}70%{opacity:1;transform:translate(-50%,-50%) scale(1.07)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.tool:after{content:"";position:absolute;inset:-12px;border:2px dashed white;border-radius:50%;opacity:0;transform:scale(.85);transition:transform .3s,opacity .25s}
+.tool:hover:after,.tool:focus-visible:after{opacity:1;transform:scale(1)}
+.tool svg{width:60px;height:60px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.tool span{position:absolute;bottom:29px;font-size:12px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}
+.tool:hover svg,.tool:focus-visible svg{transform:translateY(-12px)}
+.tool:hover span,.tool:focus-visible span{opacity:1;transform:translateY(0)}
+.modal-open{overflow:hidden}
+.sheet{color:var(--ink);background:var(--paper);border:0;border-radius:8px;box-shadow:0 24px 90px #002c5860;width:min(760px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 48px);margin:auto;padding:0;overflow:auto;overscroll-behavior:contain}
+.sheet{opacity:0;transform:translateY(16px) scale(.97);transition:opacity 260ms ease,transform 260ms cubic-bezier(.2,.8,.2,1)}
+.sheet.is-visible{opacity:1;transform:translateY(0) scale(1)}
+.sheet.is-closing{transition-duration:180ms}
+.sheet::backdrop{background:#06365b70;opacity:0;transition:opacity 260ms ease}
+.sheet.is-visible::backdrop{opacity:1}
+.sheet.is-closing::backdrop{transition-duration:180ms}
+.dialog-content{padding:26px 30px 30px;min-height:345px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #173c511c;padding-bottom:17px;margin-bottom:22px}
+h2{font-size:17px;margin:0;font-weight:600}.stamp{font-family:monospace;font-size:10px;letter-spacing:.1em;color:#68818e;margin-left:auto}
+.close-dialog{flex-shrink:0;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;background:#15344e09;font-size:26px;line-height:1}
+.close-dialog:hover{background:#15344e18}
+.modes,.actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.mode,.secondary{background:transparent;border:1px solid #16344e28;border-radius:5px;padding:9px 13px;font-size:12px}.mode[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}.clock{font-variant-numeric:tabular-nums;font-size:clamp(64px,13vw,90px);line-height:1;letter-spacing:-.065em;text-align:center;margin:22px 0 12px}.timer-status{text-align:center;font-size:12px;color:#647d89;min-height:16px;margin:0 0 21px}.primary{border:1px solid var(--ink);background:var(--ink);color:white;padding:11px 26px;border-radius:5px;font-size:13px}.note-label{display:block;font-size:12px;color:#647d89;margin-bottom:10px}textarea{width:100%;resize:vertical;min-height:200px;border:0;background:repeating-linear-gradient(transparent,transparent 31px,#16344e12 31px,#16344e12 32px);font-size:16px;line-height:32px;color:var(--ink);padding:0 4px}.note-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;font-size:11px;color:#647d89}.note-foot button{font-size:11px}.builder{display:grid;grid-template-columns:1fr 1fr;gap:28px}.controls{display:grid;gap:17px}.control label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}.control output{font-family:monospace;color:#647d89}input[type=range]{width:100%;accent-color:#0871c9;margin:0}input[type=color]{width:40px;height:28px;border:0;padding:0;background:transparent;cursor:pointer}.colors{display:flex;gap:25px}.colors label{font-size:11px;display:flex;align-items:center;gap:9px}.preview{min-height:200px;border:1px solid #16344e12;border-radius:4px;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#eaf0f2 0 8px,#f4f7f8 8px 16px);overflow:hidden}.sample{width:115px;height:115px;display:grid;place-items:center;font-size:12px}.code-wrap{margin-top:22px;background:#eef1ed;border-radius:4px;padding:14px;position:relative}pre{margin:0;white-space:pre-wrap;font-size:11px;line-height:1.7;padding-right:65px;overflow-wrap:anywhere}.copy{position:absolute;right:10px;top:10px;font-size:11px;padding:7px 10px;background:var(--paper);border:1px solid #16344e28;border-radius:4px}.copy-status{font-size:11px;min-height:14px;margin:8px 0 0;color:#647d89}@media(max-width:600px){main{padding:24px}.tools{width:300px;height:300px}.tool{width:112px;height:112px}.tool svg{width:42px;height:42px}.tool span{bottom:20px;font-size:10px}.tool:nth-child(2){left:19%;top:76%}.tool:nth-child(3){left:81%;top:76%}.dialog-content{padding:20px 18px}.builder{grid-template-columns:1fr}.preview{min-height:170px}.stamp{font-size:8px}.colors{justify-content:space-between}.panel-head{gap:8px}.panel-head h2{font-size:15px}.sheet{max-height:calc(100dvh - 32px)}}
+@media(max-width:360px){.tools{width:260px}.tool{width:100px;height:100px}.tool span{font-size:9px}}
+@media(hover:none){.tool span{opacity:1;transform:none}.tool svg{transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body><main>
+<nav class="tools"  aria-label="Tools">
+<button class="tool" id="tab-timer" aria-haspopup="dialog" aria-controls="timer" data-panel="timer"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="23" r="13"/><path d="M20 10V5m-5 0h10m5 7 3-3M20 16v8l5 3"/></svg><span>Pomodoro</span></button>
+<button class="tool" id="tab-notes" aria-haspopup="dialog" aria-controls="notes" data-panel="notes"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M25 7H8v28h25V17M23 11l6-6 6 6-17 17-7 2 2-7Z"/></svg><span>Notes</span></button>
+<button class="tool" id="tab-css" aria-haspopup="dialog" aria-controls="css" data-panel="css"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 10h28M6 20h28M6 30h28"/><circle cx="14" cy="10" r="3" fill="#fffdf6"/><circle cx="27" cy="20" r="3" fill="#fffdf6"/><circle cx="17" cy="30" r="3" fill="#fffdf6"/></svg><span>CSS Builder</span></button></nav>
+<dialog class="sheet" id="timer" aria-labelledby="title-timer"><div class="dialog-content"><div class="panel-head"><h2 id="title-timer">Time to focus</h2><span class="stamp">01 / POMODORO</span><button class="close-dialog" aria-label="Close Pomodoro" autofocus>×</button></div><div class="modes" aria-label="Timer mode"><button class="mode" data-minutes="25" aria-pressed="true">Focus · 25 min</button><button class="mode" data-minutes="5" aria-pressed="false">Short break · 5 min</button><button class="mode" data-minutes="15" aria-pressed="false">Long break · 15 min</button></div><div class="clock" id="clock" role="timer">25:00</div><p class="timer-status" id="timer-status" aria-live="polite">One task. One small step.</p><div class="actions"><button class="primary" id="start">Start</button><button class="secondary" id="reset">Reset</button></div></div></dialog>
+<dialog class="sheet" id="notes" aria-labelledby="title-notes"><div class="dialog-content"><div class="panel-head"><h2 id="title-notes">Capture a thought</h2><span class="stamp">02 / NOTES</span><button class="close-dialog" aria-label="Close notes" autofocus>×</button></div><label class="note-label" for="note">Your draft — saved in this browser</label><textarea id="note" placeholder="What is on your mind?" spellcheck="true"></textarea><div class="note-foot"><span id="save-status" role="status">Ready for your next idea</span><span id="char-count">0 characters</span><button class="secondary" id="clear-note">Clear</button></div></div></dialog>
+<dialog class="sheet" id="css" aria-labelledby="title-css"><div class="dialog-content"><div class="panel-head"><h2 id="title-css">Shape your idea</h2><span class="stamp">03 / CSS BUILDER</span><button class="close-dialog" aria-label="Close CSS Builder" autofocus>×</button></div><div class="builder"><div class="controls">
+<div class="control"><label for="radius">Corner radius <output id="radius-value">24 px</output></label><input id="radius" type="range" min="0" max="58" value="24"></div>
+<div class="control"><label for="blur">Shadow blur <output id="blur-value">24 px</output></label><input id="blur" type="range" min="0" max="60" value="24"></div>
+<div class="control"><label for="offset">Shadow offset <output id="offset-value">12 px</output></label><input id="offset" type="range" min="0" max="25" value="12"></div>
+<div class="control"><label for="angle">Gradient angle <output id="angle-value">135°</output></label><input id="angle" type="range" min="0" max="360" value="135"></div>
+<div class="colors"><label for="color-a">Color 1 <input type="color" id="color-a" value="#ffdc89"></label><label for="color-b">Color 2 <input type="color" id="color-b" value="#f28c62"></label></div></div><div class="preview"><div class="sample" id="sample">Your idea</div></div></div><div class="code-wrap"><pre id="css-code"></pre><button class="copy" id="copy">Copy</button></div><p class="copy-status" id="copy-status" role="status"></p></div></dialog>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const launchers=[...document.querySelectorAll('[data-panel]')];
+launchers.forEach(button=>button.addEventListener('click',()=>{
+  const dialog=$(button.dataset.panel);
+  dialog.showModal();
+  // Establish the initial styles before transitioning from display:none.
+  dialog.getBoundingClientRect();
+  dialog.classList.add('is-visible');
+  document.body.classList.add('modal-open');
+}));
+document.querySelectorAll('dialog').forEach(dialog=>{
+  let backdropDown=false,closeTimeout;
+  function finishClose(){
+    clearTimeout(closeTimeout);
+    dialog.close();
+    dialog.classList.remove('is-visible','is-closing');
+  }
+  function requestClose(){
+    if(!dialog.open||dialog.classList.contains('is-closing'))return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishClose();return;}
+    dialog.classList.add('is-closing');
+    dialog.classList.remove('is-visible');
+    // Also finish if transitions are interrupted or their events are skipped.
+    closeTimeout=setTimeout(finishClose,240);
+  }
+  dialog.querySelector('.close-dialog').addEventListener('click',requestClose);
+  dialog.addEventListener('cancel',event=>{event.preventDefault();requestClose();});
+  dialog.addEventListener('transitionend',event=>{
+    if(event.target===dialog&&event.propertyName==='opacity'&&dialog.classList.contains('is-closing'))finishClose();
+  });
+  dialog.addEventListener('pointerdown',event=>{backdropDown=event.target===dialog;});
+  dialog.addEventListener('click',event=>{
+    if(backdropDown&&event.target===dialog)requestClose();
+    backdropDown=false;
+  });
+  dialog.addEventListener('close',()=>{
+    if(dialog.open)return;
+    clearTimeout(closeTimeout);
+    dialog.classList.remove('is-visible','is-closing');
+    document.body.classList.remove('modal-open');
+  });
+});
+let duration=1500,remaining=duration,deadline=0,running=false,interval=null,audioContext=null;
+function renderTimer(){const s=Math.max(0,Math.ceil(remaining)),label=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');$('clock').textContent=label;$('clock').setAttribute('aria-label','Time remaining: '+Math.floor(s/60)+' min '+s%60+' sec');document.title=running?label+' · Dotworks':'Dotworks';}
+function sound(){if(!audioContext)return;try{const o=audioContext.createOscillator(),g=audioContext.createGain();o.connect(g);g.connect(audioContext.destination);o.frequency.value=660;g.gain.setValueAtTime(.12,audioContext.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.8);o.start();o.stop(audioContext.currentTime+.8);}catch{}}
+function tick(){if(!running)return;remaining=Math.max(0,(deadline-Date.now())/1000);if(remaining<=0){running=false;clearInterval(interval);$('start').textContent='Start again';$('timer-status').textContent='All done! Time for a change of pace.';sound();}renderTimer();}
+$('start').addEventListener('click',()=>{if(running){remaining=Math.max(0,(deadline-Date.now())/1000);running=false;clearInterval(interval);$('start').textContent='Resume';$('timer-status').textContent='Paused. Pick up when you are ready.';renderTimer();return;}try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio){audioContext??=new Audio();audioContext.resume().catch(()=>{});}}catch{}if(remaining<=0)remaining=duration;deadline=Date.now()+remaining*1000;running=true;$('start').textContent='Pause';$('timer-status').textContent=duration===1500?'Focus on one thing at a time.':'Take a moment to recharge.';clearInterval(interval);interval=setInterval(tick,250);renderTimer();});
+function resetTimer(){running=false;clearInterval(interval);remaining=duration;$('start').textContent='Start';$('timer-status').textContent='One task. One small step.';renderTimer();}
+$('reset').addEventListener('click',resetTimer);document.querySelectorAll('[data-minutes]').forEach(b=>b.addEventListener('click',()=>{duration=Number(b.dataset.minutes)*60;document.querySelectorAll('[data-minutes]').forEach(x=>x.setAttribute('aria-pressed',x===b));resetTimer();}));document.addEventListener('visibilitychange',tick);
+const noteKey='blueprint-workshop-note-v1';let saveTimeout;
+function countNote(){const count=Array.from($('note').value).length;$('char-count').textContent=count+' character'+(count===1?'':'s');}
+try{const stored=localStorage.getItem(noteKey);if(stored!==null){$('note').value=stored;$('save-status').textContent='Saved draft restored';}}catch{$('save-status').textContent='Storage is unavailable in this browser';}countNote();
+function saveNote(){clearTimeout(saveTimeout);try{localStorage.setItem(noteKey,$('note').value);$('save-status').textContent='Saved in this browser';}catch{$('save-status').textContent='Unable to save. Copy your text before closing.';}}
+$('note').addEventListener('input',()=>{countNote();$('save-status').textContent='Saving…';clearTimeout(saveTimeout);saveTimeout=setTimeout(saveNote,300);});window.addEventListener('pagehide',saveNote);
+$('clear-note').addEventListener('click',()=>{if(!$('note').value)return;if(!window.confirm('Clear the entire note?'))return;$('note').value='';countNote();saveNote();$('note').focus();});
+const controls=['radius','blur','offset','angle','color-a','color-b'];
+function updateCSS(){const v=Object.fromEntries(controls.map(id=>[id,$(id).value]));for(const id of ['radius','blur','offset','angle'])$(id+'-value').textContent=v[id]+(id==='angle'?'°':' px');const bg='linear-gradient('+v.angle+'deg, '+v['color-a']+', '+v['color-b']+')',shadow='0 '+v.offset+'px '+v.blur+'px rgba(21, 52, 78, 0.25)';$('sample').style.borderRadius=v.radius+'px';$('sample').style.background=bg;$('sample').style.boxShadow=shadow;$('css-code').textContent='border-radius: '+v.radius+'px;\nbackground: '+bg+';\nbox-shadow: '+shadow+';';$('copy-status').textContent='';}
+controls.forEach(id=>$(id).addEventListener('input',updateCSS));updateCSS();
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('css-code').textContent);$('copy-status').textContent='CSS copied';}catch{const s=window.getSelection(),r=document.createRange();r.selectNodeContents($('css-code'));s.removeAllRanges();s.addRange(r);$('copy-status').textContent='Code selected — press Ctrl+C or ⌘C.';}});
+</script></body></html>
